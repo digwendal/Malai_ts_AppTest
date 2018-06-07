@@ -19,7 +19,9 @@ export class TestButtonBinderComponent implements OnInit {
   ngOnInit() {
     new ButtonBinder(() => new AnonCmd(() => {
       alert('test');
-    })).on(this.elm.nativeElement).bind();
+    })).on(this.elm.nativeElement).first((i, c) => {
+      i.getWidget();
+    }).bind();
   }
 
 }

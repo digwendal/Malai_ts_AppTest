@@ -2,15 +2,14 @@ import {CommandImpl} from '../../../MalaiFork/malai-core/org.malai.ts/src-core/c
 import {DatePicked} from '../../../MalaiFork/malai-core/org.malai.ts/src/interaction/library/DatePicked';
 import {WidgetData} from '../../../MalaiFork/malai-core/org.malai.ts/src-core/interaction/WidgetData';
 import {DateChoiceComponent} from '../app/date-choice/date-choice.component';
-import {range} from 'rxjs';
 
 export class DateShowerCommand extends CommandImpl {
-  datePicker: DatePicked;
+  datePickerData: WidgetData<Element>;
   src: DateChoiceComponent;
 
-  public constructor(datePicker: DatePicked, src: DateChoiceComponent) {
+  public constructor(datePickerData: WidgetData<Element>, src: DateChoiceComponent) {
     super();
-    this.datePicker = datePicker;
+    this.datePickerData = datePickerData;
     this.src = src;
   }
 
@@ -19,8 +18,7 @@ export class DateShowerCommand extends CommandImpl {
   }
 
   protected doCmdBody(): void {
-    const elementData: WidgetData<Element> = this.datePicker.getData();
-    const elementTarget: HTMLInputElement = <HTMLInputElement>elementData.getWidget();
+    const elementTarget: HTMLInputElement = <HTMLInputElement>this.datePickerData.getWidget();
     const date_choice = elementTarget.valueAsDate;
     let src = '';
     if (date_choice.getMonth() >= 2 && date_choice.getMonth() <= 4) {
